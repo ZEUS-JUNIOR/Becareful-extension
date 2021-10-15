@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+    "name": "Becareful",
+    "description": "Cette extension est un filtre pour filtrer les contenus violents et pornographiques en façon de l'option choisi",
+    "version": "0.1",
+    "content_scripts":[
+        {
+            "matches":["<all_urls>"], // appliquer sur toute les pages  
+            "js": ["sketch/context.js","sketch/jquery-3.6.0.min.js"],//,"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"], // façon qui s'excute dans tout les pages
+            "css": ["css/content.css"] // fichier .css qui s'excute partout
+        }
+    ],
+    "browser_action": {
+        "default_icon":  "icon/1f645-1f3ff-2642.png",
+        "default_popup": "sketch/popup.html", // C'est cette page popup.html qui va s'afficher lorsqu'on clique sur l'icone
+        "default_title": "Becareful", 
+        "browser_style": true
+    },
+    "icons":
+    {
+        "128": "icon/1f645-1f3ff-2642.png",
+        "48": "icon/1f645-1f3ff-2640.png",
+        "16": "icon/1f4c2.png"
+    },
+    "permissions":[
+        "activeTab",
+        "tabs",
+        "storage",
+        "notifications",
+        "contextMenus",
+        "declarativeContent",
+        "<all_urls>"
+    ],
+    "background":{
+        "scripts": ["sketch/eventPage.js"],
+        "persistent": false
+    },
+    "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest 'unsafe-eval'; object-src 'self'"
+
+}
